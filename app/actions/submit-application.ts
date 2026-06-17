@@ -18,16 +18,16 @@ export async function submitApplication(
 ): Promise<ApplicationResult> {
   const get = (k: string) => String(formData.get(k) ?? "").trim();
 
-  const name = get("name");
+  const first_name = get("first_name");
+  const last_name = get("last_name");
+  const phone = get("phone");
   const email = get("email");
-  const business_name = get("business_name");
-  const website = get("website");
-  const current_ranking = get("current_ranking");
-  const monthly_revenue = get("monthly_revenue");
-  const goals = get("goals");
+  const industry = get("industry");
+  const marketing_spend = get("marketing_spend");
+  const help = get("help");
 
-  if (!name || !business_name) {
-    return { ok: false, error: "Please add your name and business name." };
+  if (!first_name || !last_name) {
+    return { ok: false, error: "Please add your first and last name." };
   }
   if (!EMAIL_RE.test(email)) {
     return { ok: false, error: "Please enter a valid email address." };
@@ -40,13 +40,13 @@ export async function submitApplication(
   try {
     const supabase = await createClient();
     const { error } = await supabase.from("applications").insert({
-      name,
+      first_name,
+      last_name,
+      phone,
       email,
-      business_name,
-      website,
-      current_ranking,
-      monthly_revenue,
-      goals,
+      industry,
+      marketing_spend,
+      help,
     });
 
     if (error) {
@@ -62,18 +62,17 @@ export async function submitApplication(
   await sendEmail({
     to: process.env.APPLICATIONS_TO ?? siteConfig.email,
     replyTo: email,
-    subject: `New application — ${business_name}`,
+    subject: `New application — ${first_name} ${last_name}`,
     html: `
       <div style="font-family:Inter,Arial,sans-serif;color:#000;line-height:1.6">
         <h1 style="font-size:18px">New application</h1>
         <ul>
-          <li><strong>Name:</strong> ${name}</li>
+          <li><strong>Name:</strong> ${first_name} ${last_name}</li>
+          <li><strong>Phone:</strong> ${phone || "—"}</li>
           <li><strong>Email:</strong> ${email}</li>
-          <li><strong>Business:</strong> ${business_name}</li>
-          <li><strong>Website:</strong> ${website || "—"}</li>
-          <li><strong>Current ranking:</strong> ${current_ranking || "—"}</li>
-          <li><strong>Monthly revenue:</strong> ${monthly_revenue || "—"}</li>
-          <li><strong>Goals:</strong> ${goals || "—"}</li>
+          <li><strong>Industry:</strong> ${industry || "—"}</li>
+          <li><strong>Marketing spend:</strong> ${marketing_spend || "—"}</li>
+          <li><strong>Help needed:</strong> ${help || "—"}</li>
         </ul>
       </div>
     `,

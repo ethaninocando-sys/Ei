@@ -5,30 +5,12 @@ import {
   submitApplication,
   type ApplicationResult,
 } from "@/app/actions/submit-application";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { ArrowRight } from "lucide-react";
 
 const initial: ApplicationResult = { ok: false };
 
-const fields = [
-  { name: "name", label: "Your name", type: "text", required: true },
-  { name: "email", label: "Email", type: "email", required: true },
-  { name: "business_name", label: "Business name", type: "text", required: true },
-  { name: "website", label: "Website", type: "text", required: false },
-  {
-    name: "current_ranking",
-    label: "Where do you rank now? (e.g. not in top 3)",
-    type: "text",
-    required: false,
-  },
-  {
-    name: "monthly_revenue",
-    label: "Rough monthly revenue",
-    type: "text",
-    required: false,
-  },
-] as const;
+const inputClass =
+  "w-full rounded-lg border border-input bg-card px-3 py-2.5 text-sm placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring";
 
 export function ApplicationForm() {
   const [state, formAction, pending] = useActionState(submitApplication, initial);
@@ -46,40 +28,41 @@ export function ApplicationForm() {
   }
 
   return (
-    <form action={formAction} className="flex flex-col gap-5">
-      {fields.map((f) => (
-        <div key={f.name} className="flex flex-col gap-1.5">
-          <Label htmlFor={f.name}>
-            {f.label}
-            {f.required ? <span className="text-accent"> *</span> : null}
-          </Label>
-          <Input
-            id={f.name}
-            name={f.name}
-            type={f.type}
-            required={f.required}
-            className="h-11 rounded-lg border-border bg-card"
-          />
-        </div>
-      ))}
-
-      <div className="flex flex-col gap-1.5">
-        <Label htmlFor="goals">What do you want to achieve?</Label>
-        <textarea
-          id="goals"
-          name="goals"
-          rows={4}
-          className="rounded-lg border border-input bg-card px-3 py-2 text-sm outline-none focus-visible:ring-1 focus-visible:ring-ring"
-        />
+    <form action={formAction} className="flex flex-col gap-3">
+      <div className="grid grid-cols-2 gap-3">
+        <input className={inputClass} name="first_name" placeholder="First name" required />
+        <input className={inputClass} name="last_name" placeholder="Last name" required />
       </div>
+      <div className="grid grid-cols-2 gap-3">
+        <input className={inputClass} name="phone" type="tel" placeholder="Phone number" required />
+        <input className={inputClass} name="email" type="email" placeholder="Email" required />
+      </div>
+      <div className="grid grid-cols-2 gap-3">
+        <input className={inputClass} name="industry" placeholder="Which industry are you in?" required />
+        <input className={inputClass} name="marketing_spend" placeholder="Current marketing spend?" required />
+      </div>
+      <textarea
+        className={inputClass}
+        name="help"
+        placeholder="What do you need help with specifically?"
+        rows={5}
+        required
+      />
 
       {state.error ? (
         <p className="text-sm text-destructive">{state.error}</p>
       ) : null}
 
-      <Button type="submit" variant="cta" size="cta" disabled={pending}>
-        {pending ? "Submitting…" : "Send my application"}
-      </Button>
+      <div>
+        <button
+          type="submit"
+          disabled={pending}
+          className="inline-flex items-center gap-2 rounded-lg bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-80 disabled:opacity-50"
+        >
+          {pending ? "Submitting…" : "Submit"}
+          {!pending && <ArrowRight className="size-4" />}
+        </button>
+      </div>
     </form>
   );
 }

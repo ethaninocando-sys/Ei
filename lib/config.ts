@@ -13,7 +13,7 @@ export const siteConfig = {
   name: "EI Conversion",
   tagline: "Local SEO that gets you ranking in the top 3 on Google.",
   // Used in metadata, emails, and the footer.
-  email: "hello@eiconversion.com",
+  email: "ethan@ei-conversion.com",
   domain: "eiconversion.com",
   socials: {
     // Optional — leave blank to hide.

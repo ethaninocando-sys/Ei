@@ -1,17 +1,10 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { CalendarClock, Send } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { VideoEmbed } from "@/components/video-embed";
-import { StatsChips } from "@/components/stats-chips";
-import { CalEmbed } from "@/components/cal-embed";
-import { BenefitCards } from "@/components/benefit-cards";
-import { BeforeAfter } from "@/components/before-after";
-import { HowItWorks } from "@/components/how-it-works";
-import { FaqSection } from "@/components/faq-section";
-import { ApplicationForm } from "@/components/application-form";
-import { Button } from "@/components/ui/button";
+import { EmailForm } from "@/components/email-form";
+import { WorkingWith } from "@/components/working-with";
+import { TeamSection } from "@/components/team-section";
 import {
   SectionWrapper,
   PillBadge,
@@ -20,93 +13,56 @@ import {
 } from "@/components/section-wrapper";
 import { wistia } from "@/lib/config";
 
-export const metadata: Metadata = {
-  title: "Local SEO | EI Conversion",
-  description:
-    "The only two things you need to know about local SEO — and how EI Conversion gets you into the top 3 on Google.",
-};
-
-export default function LocalSeoPage() {
+export default function Home() {
   return (
     <>
       <Navbar />
       <main>
-        {/* Hero — centered, video below */}
-        <SectionWrapper className="py-14 text-center sm:py-20">
-          <h1 className="mx-auto max-w-3xl text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl">
-            The only two things you need to know about local SEO
-          </h1>
-          <p className="mx-auto mt-5 max-w-xl text-lg text-muted-foreground">
-            Watch this and you&apos;ll understand exactly how we get local
-            businesses ranking in the top 3 — and staying there.
-          </p>
+        {/* Hero — two columns: copy + form left, video right */}
+        <SectionWrapper className="py-14 sm:py-20">
+          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+            <div>
+              <h1 className="text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl">
+                Is your business invisible on Google?
+              </h1>
+              <p className="mt-5 max-w-md text-lg text-muted-foreground">
+                Watch this short video to learn why you&apos;re not ranking in
+                the top 3.
+              </p>
+              <p className="mt-5 max-w-md font-medium">
+                Sign up below to get three free tips you can put to work today and
+                start climbing.
+              </p>
+              <div className="mt-6">
+                <EmailForm align="start" cta="Subscribe" />
+              </div>
+            </div>
 
-          <div className="mx-auto mt-10 max-w-3xl">
             <VideoEmbed
-              mediaId={wistia.salesVideoId}
-              label="Sales / pitch video (~7 min)"
+              mediaId={wistia.homepageHookVideoId}
+              label="Homepage hook video (2–3 min)"
             />
           </div>
-
-          <div className="mt-8">
-            <StatsChips />
-          </div>
         </SectionWrapper>
 
-        {/* Booking */}
-        <SectionWrapper id="book" className="py-0 text-center">
-          <PillBadge icon={CalendarClock}>Book a time</PillBadge>
-          <SectionHeading className="mt-5">
-            Grab a <Em>free</Em> strategy call
-          </SectionHeading>
-          <p className="mx-auto mt-5 max-w-xl text-muted-foreground">
-            Pick a slot that works for you. We&apos;ll review your market and
-            current rankings and show you exactly how we&apos;d get you into the
-            top 3.
-          </p>
-          <div className="mx-auto mt-10 max-w-3xl">
-            <CalEmbed />
-          </div>
-        </SectionWrapper>
+        <WorkingWith />
 
-        <BenefitCards />
-        <BeforeAfter />
-        <HowItWorks />
-        <FaqSection />
+        <TeamSection />
 
-        {/* Bottom CTA */}
+        {/* Lead magnet */}
         <SectionWrapper className="text-center">
-          <PillBadge icon={Send}>Free stuff</PillBadge>
+          <PillBadge icon={Sparkles}>Free stuff</PillBadge>
           <SectionHeading className="mt-5">
-            Book your <Em>free</Em> strategy call
+            3 tips to rank <Em>higher</Em> on Google
           </SectionHeading>
           <p className="mx-auto mt-5 max-w-xl text-muted-foreground">
-            If this sounds like what your business needs, let&apos;s talk.
-            We&apos;ll walk you through exactly how we&apos;d get you ranking in
-            the top 3.
+            Get a free video showing the first three things we do when we start
+            working with a local business to get them ranking in the top 3. No
+            technical know-how needed — enter your email and you&apos;ll get
+            instant access.
           </p>
           <div className="mt-8">
-            <Button asChild variant="cta" size="cta">
-              <Link href="#book">Book strategy call</Link>
-            </Button>
-          </div>
-        </SectionWrapper>
-
-        {/* Application */}
-        <SectionWrapper className="pt-0">
-          <div className="mx-auto max-w-xl text-center">
-            <PillBadge>Apply now</PillBadge>
-            <SectionHeading className="mt-5">
-              Or send in your <Em>application</Em>
-            </SectionHeading>
-            <p className="mt-5 text-muted-foreground">
-              Prefer to apply? Tell us about your business. If we think
-              we&apos;re a good fit, we&apos;ll reach back out to schedule a
-              call.
-            </p>
-          </div>
-          <div className="mx-auto mt-10 max-w-xl">
-            <ApplicationForm />
+            <EmailForm cta="Get 3 free tips" />
           </div>
         </SectionWrapper>
       </main>

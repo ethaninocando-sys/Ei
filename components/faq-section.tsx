@@ -12,24 +12,24 @@ import { cn } from "@/lib/utils";
 
 const faqs = [
   {
-    q: "What's the difference between SEO and Google Ads?",
-    a: "Google Ads keeps you visible only while you keep paying — the moment you stop, you vanish. Local SEO earns you a top organic spot that keeps bringing in leads without an ongoing ad budget.",
+    q: "What is the difference between SEO and Google Ads?",
+    a: "Google Ads puts you at the top of search results as long as you keep paying. The moment you stop, you disappear. SEO (what we do) gets you ranking organically, meaning Google puts you there because it considers you the most relevant result. Once you're there, you stay there without ongoing ad spend.",
   },
   {
-    q: "Which businesses do you work with?",
-    a: "Local, service-based businesses — dentists, contractors, law firms, med spas and similar — who win most of their customers from their surrounding area.",
+    q: "Which companies do you work with?",
+    a: "We work exclusively with local businesses — think dentists, plumbers, lawyers, restaurants, physiotherapists, any business that serves customers in a specific area. If people search for your service + your city on Google, we can help you.",
   },
   {
     q: "How much time will I need to invest?",
-    a: "Very little. After a short onboarding where you give us access to your Google Business Profile, we handle the work and keep you in the loop.",
+    a: "Very little. We handle everything on our end. During onboarding we'll need about 15 minutes of your time to get secure access to your Google Business Profile. After that, we do the work and send you regular updates so you always know where you stand.",
   },
   {
     q: "What are the contract terms?",
-    a: "We keep it simple and flexible. We'll walk you through the exact terms on your free strategy call so there are no surprises.",
+    a: "It's 497 dollars per month. No long-term lock-in contracts. You can cancel anytime, though most clients stick around because the results speak for themselves. We guarantee top 3 rankings within 90 days or we keep working for free until you're there.",
   },
   {
     q: "How can we get started?",
-    a: "Book a free strategy call. We'll review your market and current rankings and show you exactly how we'd get you into the top 3.",
+    a: "Book a quick strategy call with us using the button on this page. We'll look at your current Google presence together, assess your market, and tell you exactly what it would take to get you into the top 3. No pressure, no obligation.",
   },
 ];
 
@@ -40,7 +40,7 @@ export function FaqSection() {
     <SectionWrapper className="text-center">
       <PillBadge icon={HelpCircle}>FAQs</PillBadge>
       <SectionHeading className="mt-5">
-        Frequently asked <Em>questions</Em>
+        Frequently Asked <Em>Questions</Em>
       </SectionHeading>
 
       <div className="mx-auto mt-12 max-w-3xl space-y-3 text-left">
@@ -67,7 +67,7 @@ export function FaqSection() {
                 <span
                   className={cn(
                     "flex size-6 shrink-0 items-center justify-center rounded-full",
-                    isOpen ? "bg-background/15" : "bg-foreground/5",
+                    isOpen ? "bg-background/20" : "bg-transparent",
                   )}
                 >
                   {isOpen ? (
