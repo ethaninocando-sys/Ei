@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  EI Conversion design system.
+  Palette borrowed from the reference site:
+    background  #EFEBE5  warm cream   -> hsl(36 24% 92%)
+    foreground  #000000  near-black   -> hsl(0 0% 0%)
+    accent      #0000EE  electric blue-> hsl(240 100% 47%)
+    surface     #FFFFFF  white cards  -> hsl(0 0% 100%)
+  Light-only. CTAs are black pills with blue text; sections are sharp (0 radius).
+*/
+
+@layer base {
+  :root {
+    --background: 36 24% 92%;
+    --foreground: 0 0% 0%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 0%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
+    /* primary = black button, blue label (mirrors the reference CTA) */
+    --primary: 0 0% 0%;
+    --primary-foreground: 240 100% 47%;
+    --secondary: 36 22% 87%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 36 16% 84%;
+    --muted-foreground: 0 0% 32%;
+    --accent: 240 100% 47%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 36 14% 78%;
+    --input: 36 14% 78%;
+    --ring: 240 100% 47%;
+    --radius: 0rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Subtle scroll-reveal used across marketing sections (no JS dependency). */
+@layer utilities {
+  @keyframes ei-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-fade-up {
+    animation: ei-fade-up 0.6s ease-out both;
+  }
+}
