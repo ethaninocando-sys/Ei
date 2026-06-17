@@ -8,7 +8,13 @@ import { Input } from "@/components/ui/input";
 
 const initial: LeadResult = { ok: false };
 
-export function EmailForm({ cta = "Get 3 FREE Tips" }: { cta?: string }) {
+export function EmailForm({
+  cta = "Subscribe",
+  align = "center",
+}: {
+  cta?: string;
+  align?: "center" | "start";
+}) {
   const router = useRouter();
   const [state, formAction, pending] = useActionState(submitLead, initial);
 
@@ -17,26 +23,23 @@ export function EmailForm({ cta = "Get 3 FREE Tips" }: { cta?: string }) {
   }, [state.ok, router]);
 
   return (
-    <form
-      action={formAction}
-      className="mx-auto flex w-full max-w-md flex-col gap-3 sm:flex-row"
-    >
-      <Input
-        type="email"
-        name="email"
-        required
-        placeholder="you@business.com"
-        aria-label="Email address"
-        className="h-12 flex-1 bg-card text-base"
-      />
-      <Button type="submit" variant="cta" size="cta" disabled={pending}>
-        {pending ? "Sending…" : cta}
-      </Button>
+    <div className={align === "center" ? "mx-auto max-w-md" : "max-w-md"}>
+      <form action={formAction} className="flex flex-col gap-3 sm:flex-row">
+        <Input
+          type="email"
+          name="email"
+          required
+          placeholder="name@email.com"
+          aria-label="Email address"
+          className="h-12 flex-1 rounded-lg border-border bg-card text-base"
+        />
+        <Button type="submit" variant="cta" size="cta" disabled={pending}>
+          {pending ? "Sending…" : cta}
+        </Button>
+      </form>
       {state.error ? (
-        <p className="w-full text-sm text-destructive sm:absolute sm:mt-14">
-          {state.error}
-        </p>
+        <p className="mt-2 text-sm text-destructive">{state.error}</p>
       ) : null}
-    </form>
+    </div>
   );
 }

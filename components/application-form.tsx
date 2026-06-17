@@ -35,7 +35,7 @@ export function ApplicationForm() {
 
   if (state.ok) {
     return (
-      <div className="border border-border bg-card p-8 text-center">
+      <div className="rounded-2xl border border-border bg-card p-8 text-center shadow-soft">
         <h3 className="text-xl font-bold">Application received ✅</h3>
         <p className="mt-2 text-muted-foreground">
           Thanks — if we think we&apos;re a good fit we&apos;ll reach back out to
@@ -58,7 +58,7 @@ export function ApplicationForm() {
             name={f.name}
             type={f.type}
             required={f.required}
-            className="h-11 bg-card"
+            className="h-11 rounded-lg border-border bg-card"
           />
         </div>
       ))}
@@ -69,7 +69,7 @@ export function ApplicationForm() {
           id="goals"
           name="goals"
           rows={4}
-          className="border border-input bg-card px-3 py-2 text-sm outline-none focus-visible:ring-1 focus-visible:ring-ring"
+          className="rounded-lg border border-input bg-card px-3 py-2 text-sm outline-none focus-visible:ring-1 focus-visible:ring-ring"
         />
       </div>
 

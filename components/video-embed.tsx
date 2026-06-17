@@ -14,7 +14,7 @@ export function VideoEmbed({
 }) {
   if (!mediaId) {
     return (
-      <div className="flex aspect-video w-full flex-col items-center justify-center gap-3 border-2 border-dashed border-foreground/30 bg-card text-center">
+      <div className="flex aspect-video w-full flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed border-foreground/25 bg-card text-center">
         <PlayCircle className="size-12 text-foreground/40" />
         <p className="px-6 text-sm text-muted-foreground">
           <span className="font-semibold text-foreground">{label}</span>
@@ -27,7 +27,7 @@ export function VideoEmbed({
   }
 
   return (
-    <div className="aspect-video w-full overflow-hidden bg-black">
+    <div className="aspect-video w-full overflow-hidden rounded-2xl bg-black shadow-soft">
       <iframe
         src={`https://fast.wistia.net/embed/iframe/${mediaId}`}
         title={label}

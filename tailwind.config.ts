@@ -11,6 +11,10 @@ export default {
     extend: {
       fontFamily: {
         sans: ["var(--font-inter)", "ui-sans-serif", "system-ui", "sans-serif"],
+        serif: ["var(--font-serif)", "Georgia", "ui-serif", "serif"],
+      },
+      boxShadow: {
+        soft: "0 1px 2px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04)",
       },
       colors: {
         background: "hsl(var(--background))",

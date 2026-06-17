@@ -1,24 +1,30 @@
-import { SectionWrapper, Eyebrow, SectionHeading } from "@/components/section-wrapper";
+import { Users } from "lucide-react";
+import {
+  SectionWrapper,
+  PillBadge,
+  SectionHeading,
+} from "@/components/section-wrapper";
 
 type Member = { name: string; role: string; photo?: string; link?: string };
 
 // Placeholder team — swap names, roles, photos (drop images in /public) and links.
 const team: Member[] = [
-  { name: "Founder name", role: "Founder", photo: "", link: "" },
+  { name: "Team member", role: "Founder", photo: "", link: "" },
   { name: "Team member", role: "Head of SEO", photo: "", link: "" },
   { name: "Team member", role: "Client Success", photo: "", link: "" },
 ];
 
 export function TeamSection() {
   return (
-    <SectionWrapper id="team">
-      <Eyebrow>Our team</Eyebrow>
-      <SectionHeading>Meet the people behind your rankings</SectionHeading>
-      <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3">
+    <SectionWrapper id="team" className="text-center">
+      <PillBadge icon={Users}>Our team</PillBadge>
+      <SectionHeading className="mt-5">Meet the team</SectionHeading>
+
+      <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-3">
         {team.map((m, i) => {
-          const card = (
-            <div className="group h-full border border-border bg-card p-5">
-              <div className="mb-4 aspect-square w-full overflow-hidden bg-muted">
+          const inner = (
+            <>
+              <div className="aspect-[4/5] w-full overflow-hidden rounded-xl bg-foreground/10">
                 {m.photo ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
@@ -32,16 +38,18 @@ export function TeamSection() {
                   </div>
                 )}
               </div>
-              <p className="font-bold">{m.name}</p>
+              <p className="mt-4 font-semibold">{m.name}</p>
               <p className="text-sm text-muted-foreground">{m.role}</p>
-            </div>
+            </>
           );
           return m.link ? (
-            <a key={i} href={m.link} target="_blank" rel="noreferrer">
-              {card}
+            <a key={i} href={m.link} target="_blank" rel="noreferrer" className="text-left">
+              {inner}
             </a>
           ) : (
-            <div key={i}>{card}</div>
+            <div key={i} className="text-left">
+              {inner}
+            </div>
           );
         })}
       </div>

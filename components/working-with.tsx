@@ -1,27 +1,17 @@
-// Industries / niches you serve. Swap for client logos in /public later.
-const industries = [
-  "Dentists",
-  "Law firms",
-  "Contractors",
-  "Med spas",
-  "Roofers",
-  "Realtors",
-];
+// Greyscale placeholder "client logos". Swap for real logos in /public later.
+const PLACEHOLDER_LOGOS = 6;
 
 export function WorkingWith() {
   return (
-    <div className="w-full border-y border-border/60 bg-card/40">
-      <div className="mx-auto w-full max-w-5xl px-5 py-8 sm:px-8">
-        <p className="mb-5 text-center text-sm font-medium uppercase tracking-widest text-muted-foreground">
-          Working with local businesses like
-        </p>
-        <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-          {industries.map((name) => (
-            <span key={name} className="text-lg font-semibold text-foreground/70">
-              {name}
-            </span>
-          ))}
-        </div>
+    <div className="mx-auto w-full max-w-5xl px-5 sm:px-8">
+      <p className="mb-6 text-sm text-muted-foreground">Working with…</p>
+      <div className="flex flex-wrap items-center gap-x-10 gap-y-6 opacity-60">
+        {Array.from({ length: PLACEHOLDER_LOGOS }).map((_, i) => (
+          <div key={i} className="flex items-center gap-2">
+            <div className="size-8 rounded-full bg-foreground/15" />
+            <div className="h-3 w-20 rounded bg-foreground/15" />
+          </div>
+        ))}
       </div>
     </div>
   );

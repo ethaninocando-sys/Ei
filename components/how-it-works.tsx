@@ -1,4 +1,10 @@
-import { SectionWrapper, Eyebrow, SectionHeading } from "@/components/section-wrapper";
+import { Rocket } from "lucide-react";
+import {
+  SectionWrapper,
+  PillBadge,
+  SectionHeading,
+  Em,
+} from "@/components/section-wrapper";
 
 const steps = [
   {
@@ -25,15 +31,25 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <SectionWrapper>
-      <Eyebrow>How does it work?</Eyebrow>
-      <SectionHeading>It&apos;s pretty easy.</SectionHeading>
-      <div className="mt-10 grid grid-cols-1 gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+    <SectionWrapper className="text-center">
+      <PillBadge icon={Rocket}>How does it work?</PillBadge>
+      <SectionHeading className="mt-5">
+        It&apos;s pretty <Em>easy</Em>.
+      </SectionHeading>
+
+      <div className="mx-auto mt-12 flex max-w-3xl flex-col gap-3 text-left">
         {steps.map((s) => (
-          <div key={s.n} className="bg-card p-6">
-            <span className="text-3xl font-bold text-accent">{s.n}</span>
-            <h3 className="mt-3 text-lg font-bold">{s.title}</h3>
-            <p className="mt-2 text-sm text-muted-foreground">{s.body}</p>
+          <div
+            key={s.n}
+            className="flex items-center gap-5 rounded-xl border border-border bg-card px-6 py-5 shadow-soft"
+          >
+            <span className="text-lg font-semibold text-muted-foreground">
+              {s.n}
+            </span>
+            <div>
+              <span className="font-semibold">{s.title}</span>
+              <span className="text-muted-foreground"> — {s.body}</span>
+            </div>
           </div>
         ))}
       </div>

@@ -20,21 +20,22 @@
     --card-foreground: 0 0% 0%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 0%;
-    /* primary = black button, blue label (mirrors the reference CTA) */
-    --primary: 0 0% 0%;
-    --primary-foreground: 240 100% 47%;
+    /* primary = black button, white label (monochrome) */
+    --primary: 0 0% 7%;
+    --primary-foreground: 0 0% 100%;
     --secondary: 36 22% 87%;
     --secondary-foreground: 0 0% 0%;
     --muted: 36 16% 84%;
-    --muted-foreground: 0 0% 32%;
-    --accent: 240 100% 47%;
+    --muted-foreground: 0 0% 38%;
+    /* fully monochrome — no blue anywhere */
+    --accent: 0 0% 7%;
     --accent-foreground: 0 0% 100%;
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 72% 45%;
     --destructive-foreground: 0 0% 98%;
-    --border: 36 14% 78%;
-    --input: 36 14% 78%;
-    --ring: 240 100% 47%;
-    --radius: 0rem;
+    --border: 36 14% 80%;
+    --input: 36 14% 80%;
+    --ring: 0 0% 20%;
+    --radius: 0.75rem;
   }
 }
 

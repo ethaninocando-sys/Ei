@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { MailCheck } from "lucide-react";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import { Button } from "@/components/ui/button";
+import { AnalysisForm } from "@/components/analysis-form";
+import { PillBadge } from "@/components/section-wrapper";
 
 export const metadata: Metadata = {
-  title: "Check your inbox | EI Conversion",
+  title: "Get your profile analyzed | EI Conversion",
   robots: { index: false },
 };
 
@@ -14,21 +13,27 @@ export default function FreeAnalysisPage() {
   return (
     <>
       <Navbar />
-      <main className="flex min-h-[70vh] items-center justify-center px-5 py-20 text-center">
-        <div className="max-w-md animate-fade-up">
-          <MailCheck className="mx-auto size-14 text-accent" />
-          <h1 className="mt-6 text-3xl font-bold tracking-tight sm:text-4xl">
-            Check your inbox
-          </h1>
-          <p className="mt-4 text-muted-foreground">
-            Your 3 free tips are on the way. If you don&apos;t see the email in a
-            minute or two, check your spam folder.
-          </p>
-          <div className="mt-8">
-            <p className="mb-4 font-semibold">Ready to go further?</p>
-            <Button asChild variant="cta" size="cta">
-              <Link href="/local-seo#book">Book a free strategy call</Link>
-            </Button>
+      <main className="w-full px-5 py-16 sm:px-8 sm:py-24">
+        <div className="mx-auto grid w-full max-w-5xl grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
+          {/* Left: pitch */}
+          <div>
+            <PillBadge>Free stuff</PillBadge>
+            <h1 className="mt-5 text-5xl font-semibold leading-[1.02] tracking-tight sm:text-6xl">
+              Get your profile analyzed
+            </h1>
+            <p className="mt-6 max-w-md text-lg text-muted-foreground">
+              Fill out the form and we&apos;ll record your personalized analysis
+              with the exact things that need to happen so you can rank in the
+              top 3 within your area.
+            </p>
+            <p className="mt-6 max-w-md text-muted-foreground">
+              No costs, no obligations, no annoying sales pitch. Guaranteed.
+            </p>
+          </div>
+
+          {/* Right: form */}
+          <div>
+            <AnalysisForm />
           </div>
         </div>
       </main>
