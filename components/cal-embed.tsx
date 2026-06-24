@@ -1,7 +1,10 @@
 "use client";
 import { useEffect, type ReactNode } from "react";
+import { motion } from "framer-motion";
 import Cal, { getCalApi } from "@calcom/embed-react";
 import { Button } from "@/components/ui/button";
+
+const MotionButton = motion(Button);
 
 export function CalEmbed({ children = "Book a Free Strategy Call" }: { children?: ReactNode }) {
   useEffect(() => {
@@ -12,13 +15,16 @@ export function CalEmbed({ children = "Book a Free Strategy Call" }: { children?
   }, []);
 
   return (
-    <Button
+    <MotionButton
       type="button"
       variant="cta"
       size="cta"
       data-cal-namespace="popup"
       data-cal-link="thic-435i-g4ubsl/website"
       data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
+      whileTap={{ scale: 0.97 }}
+      whileHover={{ scale: 1.02 }}
+      transition={{ type: "spring", stiffness: 400, damping: 20 }}
       onClick={() => {
         const y = window.scrollY;
         requestAnimationFrame(() =>
@@ -29,7 +35,7 @@ export function CalEmbed({ children = "Book a Free Strategy Call" }: { children?
       }}
     >
       {children}
-    </Button>
+    </MotionButton>
   );
 }
 

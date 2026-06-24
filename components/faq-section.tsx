@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Plus, X, HelpCircle } from "lucide-react";
 import {
   SectionWrapper,
@@ -47,8 +48,9 @@ export function FaqSection() {
         {faqs.map((f, i) => {
           const isOpen = open === i;
           return (
-            <div
+            <motion.div
               key={i}
+              whileHover={!isOpen ? { y: -2, transition: { type: "spring", stiffness: 400, damping: 25 } } : {}}
               className={cn(
                 "overflow-hidden rounded-xl border bg-card shadow-soft transition-colors",
                 isOpen ? "border-foreground" : "border-border",
@@ -70,19 +72,32 @@ export function FaqSection() {
                     isOpen ? "bg-background/20" : "bg-transparent",
                   )}
                 >
-                  {isOpen ? (
-                    <X className="size-3.5" />
-                  ) : (
+                  <motion.span
+                    animate={{ rotate: isOpen ? 45 : 0 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    className="flex items-center justify-center"
+                  >
                     <Plus className="size-3.5" />
-                  )}
+                  </motion.span>
                 </span>
               </button>
-              {isOpen ? (
-                <p className="px-5 py-4 text-sm leading-relaxed text-muted-foreground">
-                  {f.a}
-                </p>
-              ) : null}
-            </div>
+              <AnimatePresence initial={false}>
+                {isOpen && (
+                  <motion.div
+                    key="answer"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.25, ease: "easeInOut" }}
+                    style={{ overflow: "hidden" }}
+                  >
+                    <p className="px-5 py-4 text-sm leading-relaxed text-muted-foreground">
+                      {f.a}
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
           );
         })}
       </div>

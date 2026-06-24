@@ -1,9 +1,7 @@
 import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { AnimatedSection } from "@/components/animated-section";
 
-/**
- * Consistent vertical rhythm + max-width for every marketing section.
- */
 export function SectionWrapper({
   id,
   className,
@@ -18,15 +16,13 @@ export function SectionWrapper({
       id={id}
       className={cn("w-full px-5 py-20 sm:px-8 sm:py-28", className)}
     >
-      <div className="mx-auto w-full max-w-5xl">{children}</div>
+      <AnimatedSection className="mx-auto w-full max-w-5xl">
+        {children}
+      </AnimatedSection>
     </section>
   );
 }
 
-/**
- * Small rounded chip with an icon + label that sits above a section heading.
- * Monochrome to match the reference design.
- */
 export function PillBadge({
   icon: Icon,
   children,
@@ -49,9 +45,6 @@ export function PillBadge({
   );
 }
 
-/**
- * Emphasis word(s) inside a heading — italic serif, exactly like the reference.
- */
 export function Em({ children }: { children: React.ReactNode }) {
   return <span className="font-serif font-normal italic">{children}</span>;
 }
