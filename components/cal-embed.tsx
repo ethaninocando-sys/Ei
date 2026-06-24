@@ -1,34 +1,53 @@
-import { CalendarClock } from "lucide-react";
-import { cal, isConfigured } from "@/lib/config";
+"use client";
+import { useEffect, type ReactNode } from "react";
+import Cal, { getCalApi } from "@calcom/embed-react";
+import { Button } from "@/components/ui/button";
 
-/**
- * Inline Cal.com booker via iframe — no @calcom/embed-react dependency, so the
- * project installs with zero extra packages. When the booking link is empty it
- * renders a labelled placeholder.
- */
-export function CalEmbed() {
-  if (!isConfigured.booking) {
-    return (
-      <div className="flex min-h-[480px] w-full flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed border-foreground/25 bg-card text-center">
-        <CalendarClock className="size-12 text-foreground/40" />
-        <p className="px-6 text-sm text-muted-foreground">
-          <span className="font-semibold text-foreground">
-            Booking calendar goes here
-          </span>
-          <br />
-          Add your Cal.com link in{" "}
-          <code className="rounded bg-muted px-1">lib/config.ts</code>
-        </p>
-      </div>
-    );
-  }
+export function CalEmbed({ children = "Book a Free Strategy Call" }: { children?: ReactNode }) {
+  useEffect(() => {
+    (async () => {
+      const cal = await getCalApi({ namespace: "popup" });
+      cal("ui", { hideEventTypeDetails: false, layout: "month_view" });
+    })();
+  }, []);
 
   return (
-    <div className="w-full overflow-hidden rounded-2xl border border-border bg-card shadow-soft">
-      <iframe
-        src={`https://cal.com/${cal.bookingLink}`}
-        title="Book a strategy call"
-        className="h-[680px] w-full"
+    <Button
+      type="button"
+      variant="cta"
+      size="cta"
+      data-cal-namespace="popup"
+      data-cal-link="thic-435i-g4ubsl/website"
+      data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
+      onClick={() => {
+        const y = window.scrollY;
+        requestAnimationFrame(() =>
+          requestAnimationFrame(() =>
+            window.scrollTo({ top: y, behavior: "instant" })
+          )
+        );
+      }}
+    >
+      {children}
+    </Button>
+  );
+}
+
+export function CalInline() {
+  useEffect(() => {
+    (async () => {
+      const cal = await getCalApi({ namespace: "inline" });
+      cal("ui", { hideEventTypeDetails: false, layout: "month_view" });
+    })();
+  }, []);
+
+  return (
+    <div className="w-full overflow-x-hidden">
+      <Cal
+        namespace="inline"
+        calLink="thic-435i-g4ubsl/website"
+        style={{ width: "100%" }}
+        config={{ layout: "month_view", useSlotsViewOnSmallScreen: "true" }}
       />
     </div>
   );

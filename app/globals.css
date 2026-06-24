@@ -43,6 +43,10 @@
   * {
     @apply border-border;
   }
+  /* Keep scrollbar always visible so Cal.com modal open/close doesn't shift layout */
+  html {
+    overflow-y: scroll;
+  }
   body {
     @apply bg-background text-foreground;
   }
