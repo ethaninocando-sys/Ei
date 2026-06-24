@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { Eye, CreditCard, ClockArrowUp, CheckCircle } from "lucide-react";
 import {
   SectionWrapper,
@@ -31,20 +34,31 @@ export function BenefitCards() {
         <span className="font-serif font-bold italic">But,</span> Is This Even Worth It?
       </SectionHeading>
 
-      <div className="mt-12 grid grid-cols-1 gap-6 text-left sm:grid-cols-3">
-        {benefits.map((b) => (
-          <div
+      <motion.div
+        className="mt-12 grid grid-cols-1 gap-6 text-left sm:grid-cols-3"
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-60px" }}
+        transition={{ staggerChildren: 0.1 }}
+      >
+        {benefits.map((b, i) => (
+          <motion.div
             key={b.title}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+            whileHover={{ y: -4, transition: { type: "spring", stiffness: 400, damping: 20 } }}
             className="rounded-2xl border border-border bg-card p-7 shadow-soft"
           >
-            <b.icon className="size-7 text-indigo-500" strokeWidth={1.5} />
+            <b.icon className="size-7 text-foreground/60" strokeWidth={1.5} />
             <h3 className="mt-5 text-lg font-semibold">{b.title}</h3>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
               {b.body}
             </p>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </SectionWrapper>
   );
 }

@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { Send } from "lucide-react";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import { VideoEmbed } from "@/components/video-embed";
-import { StatsChips } from "@/components/stats-chips";
+import { HeroSection } from "@/components/hero-section";
 import { CalEmbed, CalInline } from "@/components/cal-embed";
 import { BenefitCards } from "@/components/benefit-cards";
 import { BeforeAfter } from "@/components/before-after";
@@ -16,7 +15,6 @@ import {
   SectionHeading,
   Em,
 } from "@/components/section-wrapper";
-import { wistia } from "@/lib/config";
 
 export const metadata: Metadata = {
   title: "EI Conversion | Local SEO",
@@ -29,23 +27,7 @@ export default function LocalSeoPage() {
     <>
       <Navbar />
       <main>
-        {/* Hero — centered, video below */}
-        <SectionWrapper className="py-14 text-center sm:py-20">
-          <h1 className="mx-auto max-w-3xl text-4xl font-normal leading-[1.05] tracking-tight sm:text-6xl">
-            <span className="font-bold">The ONLY two things</span> you need to know about marketing
-          </h1>
-
-          <div className="mx-auto mt-10 max-w-3xl">
-            <VideoEmbed
-              mediaId={wistia.salesVideoId}
-              label="Sales / pitch video (~7 min)"
-            />
-          </div>
-
-          <div className="mt-8">
-            <StatsChips />
-          </div>
-        </SectionWrapper>
+        <HeroSection />
 
         {/* Booking */}
         <SectionWrapper id="book" className="py-0">
