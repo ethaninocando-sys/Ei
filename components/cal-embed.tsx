@@ -3,21 +3,30 @@ import { useEffect, type ReactNode } from "react";
 import Cal, { getCalApi } from "@calcom/embed-react";
 import { Button } from "@/components/ui/button";
 
-async function initCal() {
-  const cal = await getCalApi({ namespace: "website" });
-  cal("ui", { hideEventTypeDetails: false, layout: "month_view" });
-}
-
 export function CalEmbed({ children = "Book a Free Strategy Call" }: { children?: ReactNode }) {
-  useEffect(() => { initCal(); }, []);
+  useEffect(() => {
+    (async () => {
+      const cal = await getCalApi({ namespace: "popup" });
+      cal("ui", { hideEventTypeDetails: false, layout: "month_view" });
+    })();
+  }, []);
 
   return (
     <Button
+      type="button"
       variant="cta"
       size="cta"
-      data-cal-namespace="website"
+      data-cal-namespace="popup"
       data-cal-link="thic-435i-g4ubsl/website"
       data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
+      onClick={() => {
+        const y = window.scrollY;
+        requestAnimationFrame(() =>
+          requestAnimationFrame(() =>
+            window.scrollTo({ top: y, behavior: "instant" })
+          )
+        );
+      }}
     >
       {children}
     </Button>
@@ -25,14 +34,21 @@ export function CalEmbed({ children = "Book a Free Strategy Call" }: { children?
 }
 
 export function CalInline() {
-  useEffect(() => { initCal(); }, []);
+  useEffect(() => {
+    (async () => {
+      const cal = await getCalApi({ namespace: "inline" });
+      cal("ui", { hideEventTypeDetails: false, layout: "month_view" });
+    })();
+  }, []);
 
   return (
-    <Cal
-      namespace="website"
-      calLink="thic-435i-g4ubsl/website"
-      style={{ width: "100%", overflow: "hidden" }}
-      config={{ layout: "month_view", useSlotsViewOnSmallScreen: "true" }}
-    />
+    <div className="w-full overflow-x-hidden">
+      <Cal
+        namespace="inline"
+        calLink="thic-435i-g4ubsl/website"
+        style={{ width: "100%" }}
+        config={{ layout: "month_view", useSlotsViewOnSmallScreen: "true" }}
+      />
+    </div>
   );
 }
