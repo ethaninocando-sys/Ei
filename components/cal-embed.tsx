@@ -1,15 +1,15 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, type ReactNode } from "react";
 import Cal, { getCalApi } from "@calcom/embed-react";
 import { Button } from "@/components/ui/button";
 
-export function CalEmbed() {
-  useEffect(() => {
-    (async () => {
-      const cal = await getCalApi({ namespace: "website" });
-      cal("ui", { hideEventTypeDetails: false, layout: "month_view" });
-    })();
-  }, []);
+async function initCal() {
+  const cal = await getCalApi({ namespace: "website" });
+  cal("ui", { hideEventTypeDetails: false, layout: "month_view" });
+}
+
+export function CalEmbed({ children = "Book a Free Strategy Call" }: { children?: ReactNode }) {
+  useEffect(() => { initCal(); }, []);
 
   return (
     <Button
@@ -19,18 +19,13 @@ export function CalEmbed() {
       data-cal-link="thic-435i-g4ubsl/website"
       data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
     >
-      Book a Free Strategy Call
+      {children}
     </Button>
   );
 }
 
 export function CalInline() {
-  useEffect(() => {
-    (async () => {
-      const cal = await getCalApi({ namespace: "website" });
-      cal("ui", { hideEventTypeDetails: false, layout: "month_view" });
-    })();
-  }, []);
+  useEffect(() => { initCal(); }, []);
 
   return (
     <Cal

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Send } from "lucide-react";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
@@ -11,7 +10,6 @@ import { BeforeAfter } from "@/components/before-after";
 import { HowItWorks } from "@/components/how-it-works";
 import { FaqSection } from "@/components/faq-section";
 import { ApplicationForm } from "@/components/application-form";
-import { Button } from "@/components/ui/button";
 import {
   SectionWrapper,
   PillBadge,
@@ -71,9 +69,7 @@ export default function LocalSeoPage() {
             the top 3.
           </p>
           <div className="mt-8">
-            <Button asChild variant="cta" size="cta">
-              <Link href="#book">Book strategy call</Link>
-            </Button>
+            <CalEmbed>Book strategy call</CalEmbed>
           </div>
         </SectionWrapper>
 
