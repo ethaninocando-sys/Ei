@@ -31,7 +31,7 @@ export function CalInline() {
     <Cal
       namespace="website"
       calLink="thic-435i-g4ubsl/website"
-      style={{ width: "100%", height: "100%", overflow: "scroll" }}
+      style={{ width: "100%", overflow: "hidden" }}
       config={{ layout: "month_view", useSlotsViewOnSmallScreen: "true" }}
     />
   );
