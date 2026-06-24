@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CalendarClock, Send } from "lucide-react";
+import { Send } from "lucide-react";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { VideoEmbed } from "@/components/video-embed";
 import { StatsChips } from "@/components/stats-chips";
-import { CalEmbed } from "@/components/cal-embed";
+import { CalEmbed, CalInline } from "@/components/cal-embed";
 import { BenefitCards } from "@/components/benefit-cards";
 import { BeforeAfter } from "@/components/before-after";
 import { HowItWorks } from "@/components/how-it-works";
@@ -50,19 +50,8 @@ export default function LocalSeoPage() {
         </SectionWrapper>
 
         {/* Booking */}
-        <SectionWrapper id="book" className="py-0 text-center">
-          <PillBadge icon={CalendarClock}>Book a time</PillBadge>
-          <SectionHeading className="mt-5">
-            Grab a <Em>free</Em> strategy call
-          </SectionHeading>
-          <p className="mx-auto mt-5 max-w-xl text-muted-foreground">
-            Pick a slot that works for you. We&apos;ll review your market and
-            current rankings and show you exactly how we&apos;d get you into the
-            top 3.
-          </p>
-          <div className="mx-auto mt-10 max-w-3xl">
-            <CalEmbed />
-          </div>
+        <SectionWrapper id="book" className="py-0">
+          <CalInline />
         </SectionWrapper>
 
         <BenefitCards />
@@ -99,6 +88,9 @@ export default function LocalSeoPage() {
               If we think we would be a good fit, we will reach back out and
               schedule a call with you.
             </p>
+            <div className="mt-6">
+              <CalEmbed />
+            </div>
           </div>
           <div className="mx-auto mt-10 max-w-xl">
             <ApplicationForm />
