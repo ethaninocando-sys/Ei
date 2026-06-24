@@ -38,7 +38,7 @@ export const cal = {
    * Found in your Cal.com event type under "Public URL".
    * Leave blank to show a placeholder where the booker will go.
    */
-  bookingLink: "", // e.g. "ei-conversion/strategy-call"
+  bookingLink: "thic-435i-g4ubsl/website",
 };
 
 /** True once a stub has been filled in. */
