@@ -30,9 +30,11 @@ export default function LocalSeoPage() {
         <HeroSection />
 
         {/* Booking */}
-        <SectionWrapper id="book" className="py-0">
-          <CalInline />
-        </SectionWrapper>
+        <section id="book" className="w-full px-5 sm:px-8">
+          <div className="mx-auto w-full max-w-6xl">
+            <CalInline />
+          </div>
+        </section>
 
         <BenefitCards />
         <BeforeAfter />

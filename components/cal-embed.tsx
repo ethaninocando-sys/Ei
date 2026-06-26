@@ -48,7 +48,7 @@ export function CalInline() {
   }, []);
 
   return (
-    <div className="w-full overflow-x-hidden">
+    <div className="w-full">
       <Cal
         namespace="inline"
         calLink="thic-435i-g4ubsl/website"
