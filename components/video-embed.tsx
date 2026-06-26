@@ -1,10 +1,8 @@
+"use client";
+
+import Script from "next/script";
 import { PlayCircle } from "lucide-react";
 
-/**
- * Wistia video via their lightweight iframe embed. No SDK/script needed.
- * When `mediaId` is empty it renders a labelled placeholder so the page still
- * lays out correctly before the real video exists.
- */
 export function VideoEmbed({
   mediaId,
   label,
@@ -27,14 +25,14 @@ export function VideoEmbed({
   }
 
   return (
-    <div className="aspect-video w-full overflow-hidden rounded-2xl bg-black shadow-soft">
-      <iframe
-        src={`https://fast.wistia.net/embed/iframe/${mediaId}`}
-        title={label}
-        allow="autoplay; fullscreen"
-        allowFullScreen
-        className="h-full w-full"
-      />
-    </div>
+    <>
+      <Script src="https://fast.wistia.com/assets/external/E-v1.js" strategy="afterInteractive" />
+      <div className="w-full max-w-[440px]">
+        <div
+          className={`wistia_embed wistia_async_${mediaId} videoFoam=true`}
+          style={{ position: "relative", width: "100%" }}
+        />
+      </div>
+    </>
   );
 }

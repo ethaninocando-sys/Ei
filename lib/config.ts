@@ -28,7 +28,7 @@ export const wistia = {
    * Wistia media IDs (the hashed string in a video's URL/embed code).
    * Leave blank to show a placeholder where the video will go.
    */
-  homepageHookVideoId: "", // ~2-3 min "why you're invisible on Google" video
+  homepageHookVideoId: "xbpc0fab1l", // ~2-3 min "why you're invisible on Google" video
   salesVideoId: "", // ~7 min pitch on the /local-seo page
 };
 
