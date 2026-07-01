@@ -1,12 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CheckCircle2, Clock, Zap } from "lucide-react";
+import { ShieldCheck, CalendarX, PhoneCall } from "lucide-react";
 
 const stats = [
-  { icon: CheckCircle2, label: "Satisfied Clients" },
-  { icon: Clock, label: "Years of Experience" },
-  { icon: Zap, label: "Lightning Fast Results" },
+  { icon: ShieldCheck, label: "90-Day Top 3 Guarantee" },
+  { icon: CalendarX, label: "No Long-Term Contracts" },
+  { icon: PhoneCall, label: "Free Strategy Call" },
 ];
 
 export function StatsChips() {

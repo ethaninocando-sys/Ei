@@ -3,8 +3,7 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { VideoEmbed } from "@/components/video-embed";
 import { EmailForm } from "@/components/email-form";
-import { WorkingWith } from "@/components/working-with";
-import { TeamSection } from "@/components/team-section";
+import { CaseStudy } from "@/components/case-study";
 import {
   SectionWrapper,
   PillBadge,
@@ -45,9 +44,7 @@ export default function Home() {
           </div>
         </SectionWrapper>
 
-        <WorkingWith />
-
-        <TeamSection />
+        <CaseStudy />
 
         {/* Lead magnet */}
         <SectionWrapper className="text-center">
