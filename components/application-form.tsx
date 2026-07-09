@@ -1,21 +1,15 @@
 "use client";
 
-import { useActionState } from "react";
-import {
-  submitApplication,
-  type ApplicationResult,
-} from "@/app/actions/submit-application";
+import { useForm, ValidationError } from "@formspree/react";
 import { ArrowRight } from "lucide-react";
-
-const initial: ApplicationResult = { ok: false };
 
 const inputClass =
   "w-full rounded-lg border border-input bg-card px-3 py-2.5 text-sm placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring";
 
 export function ApplicationForm() {
-  const [state, formAction, pending] = useActionState(submitApplication, initial);
+  const [state, handleSubmit] = useForm("mbdvvavy");
 
-  if (state.ok) {
+  if (state.succeeded) {
     return (
       <div className="rounded-2xl border border-border bg-card p-8 text-center shadow-soft">
         <h3 className="text-xl font-bold">Application received ✅</h3>
@@ -28,7 +22,7 @@ export function ApplicationForm() {
   }
 
   return (
-    <form action={formAction} className="flex flex-col gap-3">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-3">
       <div className="grid grid-cols-2 gap-3">
         <input className={inputClass} name="first_name" placeholder="First name" required />
         <input className={inputClass} name="last_name" placeholder="Last name" required />
@@ -49,18 +43,16 @@ export function ApplicationForm() {
         required
       />
 
-      {state.error ? (
-        <p className="text-sm text-destructive">{state.error}</p>
-      ) : null}
+      <ValidationError errors={state.errors} className="text-sm text-destructive" />
 
       <div>
         <button
           type="submit"
-          disabled={pending}
+          disabled={state.submitting}
           className="inline-flex items-center gap-2 rounded-lg bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-80 disabled:opacity-50"
         >
-          {pending ? "Submitting…" : "Submit"}
-          {!pending && <ArrowRight className="size-4" />}
+          {state.submitting ? "Submitting…" : "Submit"}
+          {!state.submitting && <ArrowRight className="size-4" />}
         </button>
       </div>
     </form>
