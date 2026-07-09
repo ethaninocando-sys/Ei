@@ -8,7 +8,7 @@ import { BenefitCards } from "@/components/benefit-cards";
 import { BeforeAfter } from "@/components/before-after";
 import { HowItWorks } from "@/components/how-it-works";
 import { FaqSection } from "@/components/faq-section";
-import { ApplicationForm } from "@/components/application-form";
+import { TallyEmbed } from "@/components/tally-embed";
 import {
   SectionWrapper,
   PillBadge,
@@ -73,7 +73,11 @@ export default function LocalSeoPage() {
             </div>
           </div>
           <div className="mx-auto mt-10 max-w-xl">
-            <ApplicationForm />
+            <TallyEmbed
+              src="https://tally.so/embed/QKylxY?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+              title="Send in your application"
+              height={374}
+            />
           </div>
         </SectionWrapper>
       </main>
