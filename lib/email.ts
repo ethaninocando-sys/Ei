@@ -45,3 +45,38 @@ export async function sendEmail({
     return { sent: false, error: "email-send-failed" };
   }
 }
+
+/**
+ * Fires a Resend Automation trigger event for a contact. Same graceful
+ * degradation as sendEmail: if RESEND_API_KEY is missing we just log and
+ * move on.
+ */
+export async function sendEvent({
+  event,
+  email,
+  payload,
+}: {
+  event: string;
+  email: string;
+  payload?: Record<string, unknown>;
+}): Promise<{ sent: boolean; error?: string }> {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    console.warn(`[email] RESEND_API_KEY not set — skipping event "${event}"`);
+    return { sent: false, error: "email-not-configured" };
+  }
+
+  try {
+    const { Resend } = await import("resend");
+    const resend = new Resend(apiKey);
+    const { error } = await resend.events.send({ event, email, payload });
+    if (error) {
+      console.error("[email] Resend event error:", error);
+      return { sent: false, error: error.message };
+    }
+    return { sent: true };
+  } catch (err) {
+    console.error("[email] Failed to send event:", err);
+    return { sent: false, error: "event-send-failed" };
+  }
+}
