@@ -31,7 +31,7 @@ export function Footer() {
                 <Link href="/local-seo" className="hover:text-foreground">Local SEO</Link>
               </li>
               <li>
-                <Link href="/#apply" className="hover:text-foreground">Book a call</Link>
+                <Link href="/local-seo#apply" className="hover:text-foreground">Book a call</Link>
               </li>
             </ul>
           </div>

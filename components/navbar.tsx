@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { getCalApi } from "@calcom/embed-react";
 import { Button } from "@/components/ui/button";
-import { siteConfig } from "@/lib/config";
+import { cal, siteConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
@@ -14,6 +15,13 @@ export function Navbar() {
     const onScroll = () => setScrolled(window.scrollY > 80);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      const calApi = await getCalApi({ namespace: "navbar-popup" });
+      calApi("ui", { hideEventTypeDetails: false, layout: "month_view" });
+    })();
   }, []);
 
   return (
@@ -31,8 +39,15 @@ export function Navbar() {
           <span className="text-lg font-semibold tracking-tight">{siteConfig.name}</span>
         </Link>
         <nav className="flex items-center gap-6">
-          <Button asChild variant="cta" className="h-9 px-5 text-sm">
-            <Link href="/#apply">See if we're a fit</Link>
+          <Button
+            type="button"
+            variant="cta"
+            className="h-9 px-5 text-sm"
+            data-cal-namespace="navbar-popup"
+            data-cal-link={cal.bookingLink}
+            data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
+          >
+            See if we&apos;re a fit
           </Button>
         </nav>
       </div>
