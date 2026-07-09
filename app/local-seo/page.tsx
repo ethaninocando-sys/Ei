@@ -8,7 +8,7 @@ import { BenefitCards } from "@/components/benefit-cards";
 import { BeforeAfter } from "@/components/before-after";
 import { HowItWorks } from "@/components/how-it-works";
 import { FaqSection } from "@/components/faq-section";
-import { ApplicationForm } from "@/components/application-form";
+import { TallyEmbed } from "@/components/tally-embed";
 import {
   SectionWrapper,
   PillBadge,
@@ -73,7 +73,7 @@ export default function LocalSeoPage() {
             </div>
           </div>
           <div className="mx-auto mt-10 max-w-xl">
-            <ApplicationForm />
+            <TallyEmbed />
           </div>
         </SectionWrapper>
       </main>

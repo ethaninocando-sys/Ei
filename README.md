@@ -36,6 +36,7 @@ until these are done.
    - `wistia.homepageHookVideoId` — your 2–3 min homepage video (Wistia media ID)
    - `wistia.salesVideoId` — your ~7 min sales video
    - `cal.bookingLink` — your Cal.com link, e.g. `ei-conversion/strategy-call`
+   - `tally.applicationFormId` — your Tally form ID, e.g. `QKylxY`
    - `siteConfig.email`, `siteConfig.domain`, `siteConfig.socials`
 2. **`.env.local`** (copy from `.env.example`):
    - `NEXT_PUBLIC_SUPABASE_URL` + `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (required for forms to save)
@@ -58,10 +59,9 @@ app/
   free-analysis/page.tsx   → Post opt-in thank-you (noindex)
   actions/
     submit-lead.ts         → Save email + send "3 free tips"
-    submit-application.ts  → Save application + notify the team
 components/                → Navbar, footer, sections, forms, embeds
 lib/
-  config.ts                → ⭐ external stubs (Wistia, Cal.com, site info)
+  config.ts                → ⭐ external stubs (Wistia, Cal.com, Tally, site info)
   email.ts                 → Resend wrapper (degrades gracefully if unset)
   supabase/                → Supabase client setup
 supabase/migrations/       → leads + applications schema
@@ -70,10 +70,10 @@ supabase/migrations/       → leads + applications schema
 ## How the data flows
 
 - **Email opt-in** → `submitLead` → upsert into `leads` → Resend sends the tips → redirect to `/free-analysis`.
-- **Application** → `submitApplication` → insert into `applications` → Resend notifies your team (reply-to = applicant).
+- **Application** → embedded Tally form (`components/tally-embed.tsx`) on `/local-seo`; submissions are handled entirely by Tally, not this app.
 
-Form submissions are stored even if Resend isn't configured; email is always
-best-effort and never blocks a save.
+Email opt-in submissions are stored even if Resend isn't configured; email is
+always best-effort and never blocks a save.
 
 ## Notes
 

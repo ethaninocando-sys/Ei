@@ -41,9 +41,18 @@ export const cal = {
   bookingLink: "thic-435i-g4ubsl/website",
 };
 
+export const tally = {
+  /**
+   * Tally form ID (the slug in your Tally embed URL, e.g. "QKylxY").
+   * Leave blank to show a placeholder where the application form will go.
+   */
+  applicationFormId: "QKylxY",
+};
+
 /** True once a stub has been filled in. */
 export const isConfigured = {
   homepageVideo: wistia.homepageHookVideoId.trim().length > 0,
   salesVideo: wistia.salesVideoId.trim().length > 0,
   booking: cal.bookingLink.trim().length > 0,
+  applicationForm: tally.applicationFormId.trim().length > 0,
 };
