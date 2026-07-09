@@ -1,7 +1,6 @@
 "use client";
 
-import { useActionState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useActionState } from "react";
 import { submitLead, type LeadResult } from "@/app/actions/submit-lead";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,12 +14,24 @@ export function EmailForm({
   cta?: string;
   align?: "center" | "start";
 }) {
-  const router = useRouter();
   const [state, formAction, pending] = useActionState(submitLead, initial);
 
-  useEffect(() => {
-    if (state.ok) router.push("/free-analysis");
-  }, [state.ok, router]);
+  if (state.ok) {
+    return (
+      <div
+        className={
+          align === "center"
+            ? "mx-auto max-w-md rounded-2xl border border-border bg-card p-6 text-center shadow-soft"
+            : "max-w-md rounded-2xl border border-border bg-card p-6 text-center shadow-soft"
+        }
+      >
+        <h3 className="text-lg font-semibold">You&apos;re subscribed ✅</h3>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Check your inbox for your 3 free tips.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className={align === "center" ? "mx-auto max-w-md" : "max-w-md"}>
